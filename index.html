@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Website</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@700&family=Raleway:wght@300&display=swap" rel="stylesheet">
+  <style>
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      background: #f9f9f9;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 50px;
+      box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+      z-index: 10;
+    }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    nav ul {
+      display: flex;
+      gap: 25px;
+      list-style: none;
+    }
+    nav a {
+      position: relative;
+      font-weight: 600;
+    }
+    nav a::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      left: 0;
+      bottom: -5px;
+      background: #ff4b5c;
+      transition: 0.6s;
+    }
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .hero_section{
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(to right , #667eea, #764ba2,#ff4b5c);
+      color: white;
+      text-align: center;
+      padding: 0 20px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 60px;
+    }
+    .hero h2 {
+      font-family: 'Raleway', sans-serif;
+      font-size: 28px;
+      margin: 20px 0;
+      border-right: 2px solid white;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      animation: typing 4s steps(30, end) forwards, blink 0.75s step-end infinite;
+    }
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+    @keyframes blink {
+      from, to { border-color: transparent; }
+      50% { border-color: white; }
+    }
+    .button {
+      margin-top: 20px;
+      padding: 15px 40px;
+      background: #9710c0;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      position: relative;
+      animation: pulse 2s infinite;
+      overflow: hidden;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    .btn::after {
+      content: "";
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: rgba(255,255,255,0.7);
+      border-radius: 100%;
+      transform: scale(1);
+      opacity: 0;
+      pointer-events: none;
+    }
+    .btn:active::after {
+      animation: ripple 0.6s linear;
+    }
+    @keyframes ripple {
+      from { opacity: 1; transform: scale(0); }
+      to { opacity: 0; transform: scale(10); }
+    }
+
+    /* Portfolio */
+    .port {
+      padding: 80px 10%;
+      background: #fff;
+      text-align: center;
+    }
+    .port h2 {
+      margin-bottom: 40px;
+      font-size: 36px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 20px;
+    }
+    .card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card img {
+      width: 100%;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    .card-content {
+      position: absolute;
+      bottom: -100%;
+      left: 0;
+      right: 0;
+      background: rgba(0,0,0,0.6);
+      color: white;
+      padding: 20px;
+      transition: bottom 0.3s ease;
+    }
+    .card:hover img {
+      transform: scale(1.1);
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.2);
+    }
+    .card:hover .card-content {
+      bottom: 0;
+    }
+
+    /* Services */
+    .services {
+      padding: 82px 14%;
+      background: #f1f1f1;
+      text-align: center;
+    }
+    .services h2 {
+      margin-bottom: 40px;
+      font-size: 36px;
+    }
+    .service-icons {
+      display: flex;
+      justify-content: center;
+      gap: 110px;
+    }
+    .icon {
+      width: 125px;
+      height: 125px;
+      background: #764ba2;
+      border-radius: 60%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      color: white;
+      transition: 0.6s;
+    }
+    .icon:hover {
+      background: #0c97c2;
+      transform: rotate(360deg);
+    }
+
+    /* Testimonials */
+    .test {
+      padding: 80px 10%;
+      text-align: center;
+      background: #fff;
+    }
+    .test h2 {
+      margin-bottom: 30px;
+      font-size: 36px;
+    }
+    .test-box {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 1s ease;
+    }
+    .test-box.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Contact */
+    .contact {
+      padding: 80px 10%;
+      background: #f1f1f1;
+    }
+    .contact h2 {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 36px;
+    }
+    form {
+      max-width: 600px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    input, textarea {
+      padding: 15px;
+      border: 1px solid #9b95a5;
+      border-radius: 5px;
+      font-size: 16px;
+      width: 100%;
+    }
+    .submit-btn {
+      padding: 15px;
+      background: #764ba2;
+      border: none;
+      color: white;
+      font-size: 18px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .submit-btn:hover {
+      box-shadow: 0 0 10px #3015a7, 0 0 20px #0c8355, 0 0 40px #96c231;
+    }
+    .shake {
+      animation: shake 0.4s;
+    }
+    @keyframes shake {
+      0%, 95% { transform: translateX(0); }
+      22%, 58% { transform: translateX(-10px); }
+      42%, 78% { transform: translateX(10px); }
+    }
+
+    /* Footer */
+    footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 23px;
+    }
+    .socials {
+      display: flex;
+      justify-content: center;
+      gap: 22px;
+      margin-bottom: 12px;
+    }
+    .socials a {
+      color: white;
+      font-size: 26px;
+      transition: transform 0.5s;
+    }
+    .socials a:hover {
+      animation: turn 0.7s;
+    }
+    @keyframes turn {
+      0%, 100% { transform: translateY(0);}
+      50% { transform: translateY(-11px);}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div style="text-align: center;" class="logo">Amazing portfolio
+    
+    </div>
+    <nav>
+      <ul>
+        <li><a href="h.ome.html">Home</a></li>
+        <li><a href="portfoli.html">Portfolio</a></li>
+        <li><a href="servises.html">Services</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <section class="hero_section" id="home">
+    <img src="OIP.webp" alt="">
+    <h1>This is Rohit's Portfolio </h1>
+    <h2></h2>
+    <button class="button">lets Begin!</button>
+  </section>
+  <section class="port" id="portfolio">
+    <h2>My Work</h2>
+    <div class="grid">
+      <div class="card">
+        <img src="download (1).jfif"alt="">
+        <div class="card-content">Project 1</div>
+      </div>
+      <div class="card">
+        <img src="nammi gange.jfif" alt="">
+        <div class="card-content">Project 2</div>
+      </div>
+      <div class="card">
+        <img src="download.jfif" alt="">
+        <div class="card-content">Project 3</div>
+      </div>
+      <div class="card">
+        <img src="homeaffairs.png" alt="">
+        <div class="card-content">Project 4</div>
+      </div>
+      <div class="card">
+        <img src="internship.png" alt="">
+        <div class="card-content">Project 5</div>
+      </div>
+      <div class="card">
+        <img src="carreir.jfif" alt="">
+        <div class="card-content">Project 6</div>
+      </div>
+    </div>
+  </section>
+  <section class="services" id="services">
+    <h2>How can I help you?</h2>
+    <div class="service-icons">
+      <div class="icon">💻</div>
+      <div class="icon">🎨</div>
+      <div class="icon">📱</div>
+    </div>
+  </section>
+  <section class="test" id="about">
+    <h2>Testimonials</h2>
+    <div class="test-box" id="test">
+      <p>"Rohit transformed our website into something truly amazing. Highly recommended!"
+        <br>
+        This is very helpful for all condidate and learning plateform .
+      </p>
+    </div>
+  </section>
+  <section class="contact" id="contact">
+    <h2>Contact Me</h2>
+    <form id="contactForm">
+      <input type="text" placeholder="Name" id="name">
+      <input type="email" placeholder="Email" id="email">
+      <textarea placeholder="Message" rows="5" id="message"></textarea>
+      <button type="button" class="submit-btn" id="submitBtn">Send</button>
+    </form>
+  </section>
+  <footer>
+    <div class="socials">
+      <a href="#">🌐</a>
+      <a href="#">🐦</a>
+      <a href="#">📸</a>
+    </div>
+    <p>© 2025 MyPortfolio. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
